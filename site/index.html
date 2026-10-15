@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<script>document.documentElement.classList.add("js")</script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kiiri — a little cat that lives on your desktop</title>
+  <meta name="description" content="Kiiri is an open-source desktop companion. It keeps you company, watches your coding agents, sees your screen when you ask, and points at things. Runs fully local if you want.">
+  <meta name="theme-color" content="#fffaf1">
+  <link rel="canonical" href="https://kiiri.app/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kiiri.app/">
+  <meta property="og:title" content="Kiiri — a little cat that lives on your desktop">
+  <meta property="og:description" content="Keeps you company, watches your coding agents, sees your screen when you ask. Open source. Runs fully local.">
+  <meta property="og:image" content="https://kiiri.app/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kiiri.app/assets/og.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=JetBrains+Mono:wght@400;600&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Kiiri","operatingSystem":"macOS, Windows, Linux","applicationCategory":"DesktopEnhancementApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"license":"https://opensource.org/licenses/MIT","url":"https://kiiri.app/"}
+  </script>
+</head>
+<body>
+
+<!-- Reusable mascot (outlined, for light backgrounds) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="kiiri" viewBox="60 40 470 620">
+      <g fill="none" stroke-linecap="round"><path stroke="#2A2522" stroke-width="46" d="M372 604c58-6 92-40 86-86-5-38-42-50-62-30"/><path stroke="#FDF6E9" stroke-width="32" d="M372 604c58-6 92-40 86-86-5-38-42-50-62-30"/></g>
+      <path fill="#FDF6E9" stroke="#2A2522" stroke-width="7" d="M256 642c-92 0-140-22-140-92 0-78 52-142 140-142s140 64 140 142c0 70-48 92-140 92Z"/>
+      <ellipse cx="256" cy="452" rx="98" ry="22" fill="#EADCC4"/>
+      <g fill="#FDF6E9" stroke="#2A2522" stroke-width="6"><ellipse cx="208" cy="632" rx="32" ry="18"/><ellipse cx="304" cy="632" rx="32" ry="18"/></g>
+      <path fill="#FDF6E9" stroke="#2A2522" stroke-width="7" stroke-linejoin="round" d="M256 438C146 438 84 384 84 302c0-48 18-84 44-108l-9-92c-1-14 13-22 25-15l72 50c13-3 26-4 40-4s27 1 40 4l72-50c12-7 26 1 25 15l-9 92c26 24 44 60 44 108 0 82-62 136-172 136Z"/>
+      <path fill="#F2B49B" d="M146 124l52 38c-17 8-30 18-41 30Zm220 0-52 38c17 8 30 18 41 30Z"/>
+      <g transform="translate(300 126) rotate(28)"><path fill="#7E9C77" stroke="#2A2522" stroke-width="5" stroke-linejoin="round" d="M0 0C-30-10-40-42-20-66 6-56 20-28 0 0Z"/></g>
+      <g fill="#2A2522"><rect x="190" y="262" width="26" height="62" rx="13"/><rect x="296" y="262" width="26" height="62" rx="13"/><circle cx="203" cy="232" r="11"/><circle cx="309" cy="232" r="11"/></g>
+      <path fill="none" stroke="#2A2522" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" d="M234 352q11 12 22 0q11 12 22 0"/>
+      <g fill="#E2673F" opacity=".4"><ellipse cx="160" cy="344" rx="26" ry="15"/><ellipse cx="352" cy="344" rx="26" ry="15"/></g>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Kiiri home"><img src="/assets/lockup.svg" alt="Kiiri" width="88" height="36"></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#features">Features</a>
+      <a href="#agents">For developers</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="gh-pill" href="https://github.com/kiiri-app/kiiri" data-gh>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Star <span class="stars" data-stars></span>
+      </a>
+      <a class="btn small" href="#download" data-dl>Download</a>
+      <button class="menu-btn" aria-label="Menu" aria-expanded="false" data-menu><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="download">
+    <div class="wrap hero-grid">
+      <div>
+        <a class="badge" href="https://github.com/kiiri-app/kiiri"><b>OPEN SOURCE</b> MIT licensed · macOS, Windows, Linux</a>
+        <h1>A little cat that lives on <span class="hl">your desktop.</span></h1>
+        <p class="lede">Kiiri keeps you company while you work, watches your coding agents, and when you ask, looks at your screen and points at the answer.</p>
+        <div class="hero-ctas">
+          <a class="btn terra" href="https://github.com/kiiri-app/kiiri/releases/latest" data-dl-primary>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.8-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.6-1-2.6-3.9ZM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4Z"/></svg>
+            <span data-dl-label>Download for macOS</span>
+          </a>
+          <a class="btn ghost" href="#platforms" data-other>Windows &amp; Linux</a>
+        </div>
+        <p class="hero-meta" id="platforms">
+          <span>Free forever with your own key or local models.</span>
+          <a href="https://github.com/kiiri-app/kiiri/releases/latest">All downloads</a>
+        </p>
+      </div>
+
+      <div class="stage" aria-label="Kiiri sitting on a desktop next to a code editor">
+        <div class="menubar"><span>●</span><span>Editor</span><span>File</span><span>Edit</span><span class="sp">Tue 14:02</span></div>
+        <div class="win">
+          <div class="win-bar"><i></i><i></i><i></i><span>auth.ts</span></div>
+          <div class="code" data-code><span class="ln"><span class="c-c">// session refresh</span></span><span class="ln"><span class="c-k">export async function</span> <span class="c-f">refresh</span>(token) {</span><span class="ln">  <span class="c-k">const</span> res = <span class="c-k">await</span> <span class="c-f">fetch</span>(<span class="c-s">"/api/session"</span>, {</span><span class="ln">    method: <span class="c-s">"POST"</span>,</span><span class="ln" data-flag>    body: token,</span><span class="ln">  });</span><span class="ln">  <span class="c-k">if</span> (!res.ok) <span class="c-k">throw</span> <span class="c-f">expired</span>();</span><span class="ln">  <span class="c-k">return</span> res.<span class="c-f">json</span>();</span><span class="ln">}</span></div>
+        </div>
+        <div class="term" aria-hidden="true">
+          <div><span class="p">❯</span> claude "fix the refresh bug"</div>
+          <div class="dim" data-term>● Reading auth.ts…</div>
+          <div data-term2><span class="cursor-blink"></span></div>
+        </div>
+        <div class="arrow-pt" data-arrow><span class="ring"></span>
+          <svg viewBox="0 0 40 40"><path d="M6 6 34 17 21 21 17 34Z" fill="#E2673F" stroke="#FDF6E9" stroke-width="3" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="bubble hide" data-bubble><span class="tag" data-bubble-tag>Claude Code</span><div data-bubble-text>On it…</div></div>
+        <div class="pet" data-pet>
+          <svg viewBox="60 40 470 620" role="img" aria-label="Kiiri the cat">
+            <g class="k-tail"><g fill="none" stroke-linecap="round"><path stroke="#2A2522" stroke-width="46" d="M372 604c58-6 92-40 86-86-5-38-42-50-62-30"/><path stroke="#FDF6E9" stroke-width="32" d="M372 604c58-6 92-40 86-86-5-38-42-50-62-30"/></g></g>
+            <g class="k-body">
+              <path fill="#FDF6E9" stroke="#2A2522" stroke-width="7" d="M256 642c-92 0-140-22-140-92 0-78 52-142 140-142s140 64 140 142c0 70-48 92-140 92Z"/>
+              <ellipse cx="256" cy="452" rx="98" ry="22" fill="#EADCC4"/>
+              <g fill="#FDF6E9" stroke="#2A2522" stroke-width="6"><ellipse cx="208" cy="632" rx="32" ry="18"/><ellipse cx="304" cy="632" rx="32" ry="18"/></g>
+              <path fill="#FDF6E9" stroke="#2A2522" stroke-width="7" stroke-linejoin="round" d="M256 438C146 438 84 384 84 302c0-48 18-84 44-108l-9-92c-1-14 13-22 25-15l72 50c13-3 26-4 40-4s27 1 40 4l72-50c12-7 26 1 25 15l-9 92c26 24 44 60 44 108 0 82-62 136-172 136Z"/>
+              <path fill="#F2B49B" d="M146 124l52 38c-17 8-30 18-41 30Zm220 0-52 38c17 8 30 18 41 30Z"/>
+              <g transform="translate(300 126) rotate(28)"><path fill="#7E9C77" stroke="#2A2522" stroke-width="5" stroke-linejoin="round" d="M0 0C-30-10-40-42-20-66 6-56 20-28 0 0Z"/></g>
+              <g class="k-eyes" data-eyes><g class="k-pills" fill="#2A2522"><rect x="190" y="262" width="26" height="62" rx="13"/><rect x="296" y="262" width="26" height="62" rx="13"/></g><g fill="#2A2522"><circle cx="203" cy="232" r="11"/><circle cx="309" cy="232" r="11"/></g></g>
+              <path fill="none" stroke="#2A2522" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" d="M234 352q11 12 22 0q11 12 22 0"/>
+              <g fill="#E2673F" opacity=".4"><ellipse cx="160" cy="344" rx="26" ry="15"/><ellipse cx="352" cy="344" rx="26" ry="15"/></g>
+              <path class="k-sweat" fill="#9CC4E4" stroke="#2A2522" stroke-width="5" d="M418 178c14 20 20 30 20 40a20 20 0 0 1-40 0c0-10 6-20 20-40Z"/>
+              <g class="k-sparkle" fill="#F4D58D" stroke="#2A2522" stroke-width="5" stroke-linejoin="round"><path d="M70 150l10 22 22 10-22 10-10 22-10-22-22-10 22-10Z"/><path d="M450 100l7 15 15 7-15 7-7 15-7-15-15-7 15-7Z"/></g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS WITH -->
+  <div class="works">
+    <div class="wrap">
+      <p>Plays nicely with the tools you already use</p>
+      <div class="chips">
+        <span class="chip"><i></i>Claude Code</span>
+        <span class="chip"><i></i>Cursor</span>
+        <span class="chip"><i></i>Codex</span>
+        <span class="chip"><i></i>Antigravity</span>
+        <span class="chip"><i></i>Any MCP client</span>
+        <span class="chip"><i></i>Ollama</span>
+        <span class="chip"><i></i>OpenAI-compatible APIs</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">What Kiiri does</span>
+        <h2>Not another chat window.<br>A friend on your screen.</h2>
+        <p class="lede">Most AI tools want you to come to them. Kiiri sits where you already are, notices what's happening, and helps when you ask.</p>
+      </div>
+
+      <div class="feature reveal">
+        <div class="f-copy">
+          <span class="eyebrow">01 · Agents</span>
+          <h3>Know what your agents are up to without switching windows.</h3>
+          <p class="lede">Kiiri hooks into Claude Code, Cursor, Codex and Antigravity. While they work, Kiiri gets busy. When one finishes or needs you, Kiiri tells you.</p>
+          <ul>
+            <li><span><b>One-click hooks</b>, no config files to edit</span></li>
+            <li><span><b>Ding and a bubble</b> when an agent needs your input</span></li>
+            <li><span><b>Several sessions at once</b>, each with its own state</span></li>
+          </ul>
+        </div>
+        <div class="f-art butter">
+          <div class="states">
+            <div class="state s-work"><span class="dot">✍️</span><span>Claude Code<small>Refactoring auth.ts</small></span><span class="pill">working</span></div>
+            <div class="state s-think"><span class="dot">💭</span><span>Cursor<small>Planning the migration</small></span><span class="pill">thinking</span></div>
+            <div class="state s-need"><span class="dot">🔔</span><span>Codex<small>Needs approval to run tests</small></span><span class="pill">needs you</span></div>
+            <div class="state s-done"><span class="dot">✨</span><span>Claude Code<small>3 files changed · 2m 14s</small></span><span class="pill">done</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature flip reveal">
+        <div class="f-copy">
+          <span class="eyebrow">02 · Your screen</span>
+          <h3>Ask about anything on your screen. Kiiri looks, answers, and points.</h3>
+          <p class="lede">Hold <span class="kbd"><kbd>Ctrl</kbd><kbd>Alt</kbd></span> and talk, or type your question. Kiiri reads the screen, streams the answer into a bubble, and points to the exact spot.</p>
+          <ul>
+            <li><span><b>Push-to-talk</b>, typed questions, or drag a box around a region</span></li>
+            <li><span><b>Spoken answers</b> with natural voices, or your system voice offline</span></li>
+            <li><span><b>Drop the cat on something</b> to summarize, explain, translate or solve it</span></li>
+          </ul>
+        </div>
+        <div class="f-art sage">
+          <div class="ask-art">
+            <div class="ask-screen">
+              <div class="bar w60"></div><div class="bar w80"></div><div class="bar w40"></div>
+              <div class="btnrow"><div class="fake-btn"></div><div class="fake-btn"></div><div class="fake-btn target"></div></div>
+            </div>
+            <div class="ask-q">
+              <svg class="mini" viewBox="60 40 470 620" aria-hidden="true"><use href="#kiiri"/></svg>
+              <div class="say">"Where do I export this?" <br><span class="muted">It's the green <b>Export</b> button. I've marked it for you.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature reveal">
+        <div class="f-copy">
+          <span class="eyebrow">03 · Your character</span>
+          <h3>Make it yours. Then make a few more.</h3>
+          <p class="lede">Name it, give it a personality, repaint it in the pixel editor, or bring in community pets in the open petdex format. Run several at once. Each one keeps its own memory.</p>
+          <ul>
+            <li><span><b>Follows your cursor</b> with its eyes and leans toward you</span></li>
+            <li><span><b>Pick it up by the scruff</b> and it dangles, then settles where you drop it</span></li>
+            <li><span><b>Remembers its work</b>, so it can bring things up later</span></li>
+          </ul>
+        </div>
+        <div class="f-art terra">
+          <div class="char-row">
+            <div class="char-card"><svg viewBox="60 40 470 620" aria-hidden="true"><use href="#kiiri"/></svg><span>Kiiri</span><small>the original</small></div>
+            <div class="char-card"><img src="/assets/pet-pixel.svg" alt="" width="120" height="120"><span>Pixel pets</span><small>petdex format</small></div>
+            <div class="char-card"><img src="/assets/pet-yours.svg" alt="" width="120" height="120"><span>Yours</span><small>paint your own</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRID -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">And a lot more</span>
+        <h2>Small things that add up.</h2>
+      </div>
+      <div class="grid reveal">
+        <div class="tile"><div class="ic">🍅</div><h3>Pomodoro</h3><p>Focus timers with a cheer from Kiiri when you finish.</p></div>
+        <div class="tile"><div class="ic">🧘</div><h3>Stretch &amp; water</h3><p>Gentle reminders that respect your focus time.</p></div>
+        <div class="tile"><div class="ic">💬</div><h3>Chat</h3><p>A real back-and-forth conversation that streams as it types.</p></div>
+        <div class="tile"><div class="ic">🧠</div><h3>Memory</h3><p>Each character remembers what it did, and you can edit it.</p></div>
+        <div class="tile"><div class="ic">📄</div><h3>Makes files</h3><p>Slides, docs, spreadsheets and CSVs. Approve, save, undo.</p></div>
+        <div class="tile"><div class="ic">⏰</div><h3>Automations</h3><p>"Every day at 9, look at my screen and tell me what I left unfinished."</p></div>
+        <div class="tile"><div class="ic">🎯</div><h3>Profiles</h3><p>Local, fast or best quality. Switch with one click.</p></div>
+        <div class="tile"><div class="ic">🌍</div><h3>4 languages</h3><p>English, Türkçe, 日本語 and 한국어. The cat doesn't mind.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEV / MCP -->
+  <section id="agents" style="padding-top:0">
+    <div class="wrap">
+      <div class="dev reveal">
+        <div>
+          <span class="eyebrow">For developers</span>
+          <h2>Your agents can drive it, too.</h2>
+          <p class="lede">Kiiri ships a local MCP server. Any agent can make it talk, point at the screen, react, or ask it what's on screen. Everything runs locally and needs a token. Secrets and file paths are stripped before anything appears in a bubble.</p>
+          <div class="tools">
+            <div class="tool"><code>kiri_say</code> show a bubble and optionally speak it</div>
+            <div class="tool"><code>kiri_point</code> point at a spot on the screen</div>
+            <div class="tool"><code>kiri_react</code> working, thinking, done, needs-you</div>
+            <div class="tool"><code>kiri_ask_screen</code> ask about the screen and get text + coordinates</div>
+            <div class="tool"><code>kiri_status</code> what Kiiri is doing right now</div>
+          </div>
+        </div>
+        <div class="codeblock">
+          <div class="cb-bar">~/.claude.json <button type="button" data-copy="mcp">Copy</button></div>
+<pre id="mcp"><span class="c">// Kiiri adds this for you when agent monitoring is on.</span>
+{
+  <span class="k">"mcpServers"</span>: {
+    <span class="k">"kiri"</span>: {
+      <span class="k">"command"</span>: <span class="s">"~/Library/Application Support/Kiri/kiri-hook-runner.sh"</span>,
+      <span class="k">"args"</span>: [<span class="s">"kiri-mcp-server.js"</span>]
+    }
+  }
+}
+
+<span class="c">// Then just ask your agent:</span>
+<span class="s">"When the tests finish, have Kiiri point at the first failure."</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section id="privacy" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">Privacy</span>
+        <h2>Where does your screen go?</h2>
+        <p class="lede">Kiiri only looks at your screen when you ask it to. You choose where that picture goes.</p>
+      </div>
+      <div class="privacy-grid reveal">
+        <div class="p-card">
+          <h3>Local <span class="tag" style="background:var(--sage-l);color:var(--sage-d)">nowhere</span></h3>
+          <div class="route"><span>Your screen</span><em>→</em><span>Ollama on your machine</span></div>
+          <p>Nothing leaves your computer. Works on a plane with Wi-Fi off.</p>
+        </div>
+        <div class="p-card">
+          <h3>Your own key <span class="tag" style="background:var(--mist);color:#3d6b8f">direct</span></h3>
+          <div class="route"><span>Your screen</span><em>→</em><span>Anthropic / OpenAI / any compatible API</span></div>
+          <p>Kiiri talks straight to your provider with your key. We never see it.</p>
+        </div>
+        <div class="p-card">
+          <h3>Kiiri Cloud <span class="tag" style="background:var(--terra-l);color:var(--terra-d)">not stored</span></h3>
+          <div class="route"><span>Your screen</span><em>→</em><span>Kiiri proxy (in memory)</span><em>→</em><span>model</span></div>
+          <p>For Plus and Pro. Screenshots pass through memory and are never written to disk or used for training.</p>
+        </div>
+      </div>
+      <p class="pricing-foot reveal">No telemetry by default. The whole client is open source, so you can <a href="https://github.com/kiiri-app/kiiri">check for yourself</a>.</p>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" style="padding-top:0">
+    <div class="pricing">
+      <div class="wrap">
+        <div class="sec-head center reveal">
+          <span class="eyebrow">Pricing</span>
+          <h2>The free version is the real thing.</h2>
+          <p class="lede">Everything that runs on your machine is free and MIT-licensed. You only pay if you want us to run the AI for you.</p>
+          <div class="bill-toggle" role="group" aria-label="Billing period">
+            <button type="button" aria-pressed="false" data-bill="monthly">Monthly</button>
+            <button type="button" aria-pressed="true" data-bill="yearly">Yearly <span class="save">2 months free</span></button>
+          </div>
+        </div>
+        <div class="plans reveal">
+          <div class="plan">
+            <h3>Free</h3>
+            <p class="for">For tinkerers, local-model fans, and anyone with an API key.</p>
+            <div class="price"><b>$0</b><span>forever</span></div>
+            <p class="price-note">No account needed</p>
+            <ul>
+              <li>Every character, animation and pet</li>
+              <li>Agent hooks + MCP server</li>
+              <li>Ask about screen, region, push-to-talk, chat</li>
+              <li>Pomodoro, reminders, memory, automations</li>
+              <li>Bring your own key, or run fully local with Ollama</li>
+            </ul>
+            <a class="btn ghost" href="https://github.com/kiiri-app/kiiri/releases/latest">Download</a>
+          </div>
+          <div class="plan featured">
+            <span class="flag">Coming soon</span>
+            <h3>Plus</h3>
+            <p class="for">For people who just want it to work. No keys, no setup.</p>
+            <div class="price"><b data-price-m="8" data-price-y="6.67">$6.67</b><span>/ month</span></div>
+            <p class="price-note" data-note-y="$80 billed yearly" data-note-m="billed monthly">$80 billed yearly</p>
+            <ul>
+              <li>Everything in Free</li>
+              <li class="plus">AI included, no API key (600 asks / month)</li>
+              <li class="plus">Natural voices for spoken answers</li>
+              <li class="plus">Sync settings, memory and skills across devices</li>
+              <li class="plus">One character pack of your choice</li>
+            </ul>
+            <a class="btn terra" href="#waitlist">Join the waitlist</a>
+          </div>
+          <div class="plan">
+            <span class="flag" style="background:var(--ink)">Coming soon</span>
+            <h3>Pro</h3>
+            <p class="for">For heavy users and developers who live with their agents.</p>
+            <div class="price"><b data-price-m="18" data-price-y="15">$15</b><span>/ month</span></div>
+            <p class="price-note" data-note-y="$180 billed yearly" data-note-m="billed monthly">$180 billed yearly</p>
+            <ul>
+              <li>Everything in Plus</li>
+              <li class="plus">3,000 asks / month on top models</li>
+              <li class="plus">Premium voices + faster speech</li>
+              <li class="plus">Cloud automations that run while you sleep</li>
+              <li class="plus">All character packs + beta builds</li>
+            </ul>
+            <a class="btn" href="#waitlist">Join the waitlist</a>
+          </div>
+        </div>
+        <div class="packs reveal">
+          <b>Character packs</b>
+          <span class="muted">New looks, poses and sounds for your pet. Buy once, keep forever.</span>
+          <span style="font-weight:800">from $3.90</span>
+        </div>
+        <p class="pricing-foot">Students and open-source maintainers get 50% off. Just <a href="mailto:hello@kiiri.app">email us</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">How it compares</span>
+        <h2>Honest comparison.</h2>
+        <p class="lede">These are great apps. Here's where Kiiri fits.</p>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th></th><th class="us">Kiiri</th><th>Screen-aware AI buddies</th><th>Classic desktop pets</th></tr></thead>
+          <tbody>
+            <tr><td>Lives on your desktop as a character</td><td class="us y">Yes</td><td class="m">Cursor buddy</td><td class="y">Yes</td></tr>
+            <tr><td>Sees your screen and points</td><td class="us y">Yes</td><td class="y">Yes</td><td class="n">No</td></tr>
+            <tr><td>Reacts to coding agents (hooks + MCP)</td><td class="us y">Yes</td><td class="n">No</td><td class="m">Some</td></tr>
+            <tr><td>Fully local mode</td><td class="us y">Yes, with Ollama</td><td class="n">No</td><td class="n">No AI</td></tr>
+            <tr><td>Windows &amp; Linux</td><td class="us y">Yes</td><td class="m">Mostly macOS</td><td class="m">Varies</td></tr>
+            <tr><td>Open source</td><td class="us y">MIT</td><td class="m">Some</td><td class="m">Some</td></tr>
+            <tr><td>Price to get started</td><td class="us y">Free</td><td>Free tier, then ~$20/mo</td><td>Free to ~$4</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions people ask.</h2>
+      </div>
+      <div class="faq reveal">
+        <details open><summary>Is Kiiri really free?</summary><p>Yes. The desktop app is open source under the MIT license, and everything that runs on your machine is free with no time limit. Bring an API key from Anthropic, OpenAI or any compatible provider, or run models locally with Ollama. Plus and Pro only add things that cost us money to run: hosted AI, voices and sync.</p></details>
+        <details><summary>Is it always watching my screen?</summary><p>No. Kiiri only captures your screen when you ask: push-to-talk, a typed question, a region you select, or an automation you set up yourself. The cat's eyes following your cursor happens locally and doesn't involve any screenshots.</p></details>
+        <details><summary>Which AI models does it use?</summary><p>Your choice. Claude, GPT and any OpenAI-compatible endpoint work with your own key. Local models work through Ollama. Kiiri Cloud (Plus/Pro) picks a good default for you.</p></details>
+        <details><summary>How does it work with Claude Code, Cursor and Codex?</summary><p>Turn on agent monitoring and Kiiri installs small hooks for the agents you use, so it can react when they start working, finish, or need you. It also registers its MCP server, so the agent can make Kiiri talk, point, or look at your screen.</p></details>
+        <details><summary>Does it slow my computer down?</summary><p>Kiiri sits idle in a small transparent window. AI only runs when you ask for something, and the animations pause when nothing is happening.</p></details>
+        <details><summary>macOS says the app can't be opened. What do I do?</summary><p>Signed and notarized builds are on the way. Until then, right-click the app and choose <b>Open</b> the first time. On Windows, choose <b>More info → Run anyway</b>.</p></details>
+        <details><summary>Can I make my own character?</summary><p>Yes. Repaint a character in the built-in pixel editor, or drop a pet in the open petdex format (a <code>pet.json</code> plus one sprite sheet) into <code>~/.kiri/pets</code> and it shows up in the menu.</p></details>
+        <details><summary>Where does the name come from?</summary><p><i>Kiri</i> (霧) means mist in Japanese, and (桐) is the paulownia tree, which is where the little leaf on Kiiri's head comes from. The double <i>ii</i> is its face. Say it "kee-ree".</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final" id="waitlist">
+    <div class="wrap">
+      <svg class="mascot-big" viewBox="60 40 470 620" aria-hidden="true"><use href="#kiiri"/></svg>
+      <h2>Give your desktop a little company.</h2>
+      <p class="lede">Download Kiiri for free, or join the waitlist for Plus and Pro.</p>
+      <div class="hero-ctas">
+        <a class="btn terra" href="https://github.com/kiiri-app/kiiri/releases/latest" data-dl-primary><span data-dl-label>Download for macOS</span></a>
+        <a class="btn ghost" href="https://github.com/kiiri-app/kiiri">View on GitHub</a>
+      </div>
+      <form class="waitlist" data-waitlist>
+        <label for="wl-email" class="sr" style="position:absolute;left:-9999px">Email</label>
+        <input id="wl-email" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+        <button class="btn" type="submit">Join waitlist</button>
+      </form>
+      <p class="wl-msg" data-wl-msg role="status"></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <img src="/assets/lockup.svg" alt="Kiiri" width="88" height="36" style="height:36px;width:auto">
+        <p class="tagline">A little cat that lives on your desktop.</p>
+      </div>
+      <div><h4>Product</h4><ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="https://github.com/kiiri-app/kiiri/releases">Changelog</a></li><li><a href="https://github.com/kiiri-app/kiiri/releases/latest">Download</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="https://github.com/kiiri-app/kiiri#readme">Docs</a></li><li><a href="https://github.com/kiiri-app/kiiri">GitHub</a></li><li><a href="/press">Press kit</a></li><li><a href="mailto:hello@kiiri.app">Contact</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="https://github.com/kiiri-app/kiiri/blob/main/LICENSE">MIT License</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Kiiri</span><span>Not affiliated with Anthropic, OpenAI, Cursor or any other company named on this page.</span></div>
+  </div>
+</footer>
+
+<script src="/main.js" defer></script>
+</body>
+</html>
