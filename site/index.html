@@ -290,7 +290,7 @@
         <div class="p-card">
           <h3>Your own key <span class="tag" style="background:var(--mist);color:#3d6b8f">direct</span></h3>
           <div class="route"><span>Your screen</span><em>→</em><span>Anthropic / OpenAI / any compatible API</span></div>
-          <p>Kiiri talks straight to your provider with your key. We never see it.</p>
+          <p>Kiiri talks straight to your provider with your key. We never see it. Prefer keys off your laptop? Put them on <a href="https://github.com/kiiri-app/kiiri-proxy">your own proxy</a>.</p>
         </div>
         <div class="p-card">
           <h3>Kiiri Cloud <span class="tag" style="background:var(--terra-l);color:var(--terra-d)">not stored</span></h3>
@@ -327,6 +327,7 @@
               <li>Ask about screen, region, push-to-talk, chat</li>
               <li>Pomodoro, reminders, memory, automations</li>
               <li>Bring your own key, or run fully local with Ollama</li>
+              <li>Self-host your own AI proxy, free (guided)</li>
             </ul>
             <a class="btn ghost" href="https://github.com/kiiri-app/kiiri/releases/latest">Download</a>
           </div>
@@ -408,6 +409,7 @@
         <details><summary>Is it always watching my screen?</summary><p>No. Kiiri only captures your screen when you ask: push-to-talk, a typed question, a region you select, or an automation you set up yourself. The cat's eyes following your cursor happens locally and doesn't involve any screenshots.</p></details>
         <details><summary>Which AI models does it use?</summary><p>Your choice. Claude, GPT and any OpenAI-compatible endpoint work with your own key. Local models work through Ollama. Kiiri Cloud (Plus/Pro) picks a good default for you.</p></details>
         <details><summary>How does it work with Claude Code, Cursor and Codex?</summary><p>Turn on agent monitoring and Kiiri installs small hooks for the agents you use, so it can react when they start working, finish, or need you. It also registers its MCP server, so the agent can make Kiiri talk, point, or look at your screen.</p></details>
+        <details><summary>Can I host the AI part myself?</summary><p>Yes. <a href="https://github.com/kiiri-app/kiiri-proxy">kiiri-proxy</a> is a small open-source Cloudflare Worker you deploy to your own account in about two minutes. Your API keys stay there, each device gets its own token, and chat, screen questions and voice all go through it. It's the same proxy core that Kiiri Cloud runs on.</p></details>
         <details><summary>Does it slow my computer down?</summary><p>Kiiri sits idle in a small transparent window. AI only runs when you ask for something, and the animations pause when nothing is happening.</p></details>
         <details><summary>macOS says the app can't be opened. What do I do?</summary><p>Signed and notarized builds are on the way. Until then, right-click the app and choose <b>Open</b> the first time. On Windows, choose <b>More info → Run anyway</b>.</p></details>
         <details><summary>Can I make my own character?</summary><p>Yes. Repaint a character in the built-in pixel editor, or drop a pet in the open petdex format (a <code>pet.json</code> plus one sprite sheet) into <code>~/.kiri/pets</code> and it shows up in the menu.</p></details>
