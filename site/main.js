@@ -41,52 +41,14 @@
     })
     .catch(() => {});
 
-  // Hero pet: eyes follow the cursor
-  const eyes = $("[data-eyes]");
-  const pet = $("[data-pet]");
-  if (eyes && pet && !reduced) {
-    let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
-    const tick = () => {
-      cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18;
-      eyes.setAttribute("transform", `translate(${cx.toFixed(2)} ${cy.toFixed(2)})`);
-      raf = Math.abs(tx - cx) + Math.abs(ty - cy) > 0.05 ? requestAnimationFrame(tick) : 0;
-    };
-    addEventListener("pointermove", (e) => {
-      const r = pet.getBoundingClientRect();
-      const dx = e.clientX - (r.left + r.width / 2);
-      const dy = e.clientY - (r.top + r.height * 0.42);
-      const d = Math.hypot(dx, dy) || 1;
-      const k = Math.min(1, d / 260);
-      tx = (dx / d) * 14 * k; ty = (dy / d) * 10 * k;
-      if (!raf) raf = requestAnimationFrame(tick);
-    }, { passive: true });
-  }
-
-  // Hero story loop: agent works → finishes → Kiiri points at the fixed line
-  const bubble = $("[data-bubble]"), bText = $("[data-bubble-text]"), bTag = $("[data-bubble-tag]");
-  const term = $("[data-term]"), term2 = $("[data-term2]");
-  const arrow = $("[data-arrow]"), flagLine = $("[data-flag]"), stage = $(".stage");
-  const say = (tag, text) => { bTag.textContent = tag; bText.textContent = text; bubble.classList.remove("hide"); };
-  const hush = () => bubble.classList.add("hide");
-  const setPet = (state) => { pet.classList.remove("working", "happy"); if (state) pet.classList.add(state); };
-  const placeArrow = () => {
-    const s = stage.getBoundingClientRect(), l = flagLine.getBoundingClientRect();
-    arrow.style.left = `${l.left - s.left + Math.min(150, l.width * 0.4)}px`;
-    arrow.style.top = `${l.top - s.top + l.height / 2 - 4}px`;
-  };
-  const steps = [
-    [0, () => { setPet("working"); term.textContent = "● Reading auth.ts…"; term2.innerHTML = '<span class="cursor-blink"></span>'; say("Claude Code", "Working on it…"); }],
-    [1800, () => { term.textContent = "● Editing auth.ts (1 change)"; }],
-    [3400, () => { term.innerHTML = '<span class="ok">✓ Done</span> <span class="dim">· 1 file changed · 41s</span>'; term2.textContent = ""; setPet("happy"); say("Claude Code", "All done! Want me to show you what changed?"); }],
-    [6200, () => { setPet(null); placeArrow(); arrow.classList.add("show"); flagLine.classList.add("flag"); say("Kiiri", "Here: it now sends the token as JSON."); }],
-    [9800, () => { arrow.classList.remove("show"); flagLine.classList.remove("flag"); hush(); }],
-  ];
-  const CYCLE = 11500;
-  if (bubble && term && arrow && flagLine && stage) {
-    const run = () => steps.forEach(([t, fn]) => setTimeout(fn, t));
-    if (reduced) steps[3][1]();
-    else { run(); setInterval(run, CYCLE); }
-    addEventListener("resize", () => arrow.classList.contains("show") && placeArrow());
+  // Hero video: no autoplay for reduced motion, pause while off screen
+  const heroVideo = $("[data-hero-video]");
+  if (heroVideo) {
+    if (reduced) { heroVideo.removeAttribute("autoplay"); heroVideo.pause(); }
+    else if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([en]) => (en.isIntersecting ? heroVideo.play().catch(() => {}) : heroVideo.pause()))
+        .observe(heroVideo);
+    }
   }
 
   // Billing toggle
