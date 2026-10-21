@@ -443,11 +443,29 @@ footer { border-top: 1.5px solid var(--line); padding: 56px 0 40px; font-size: 1
 .snd[aria-pressed="true"] { background: var(--terra, #E2673F); }
 
 /* "See it work" gallery: a row of phone-shaped clips that scrolls sideways */
-.gallery { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(200px, 23%); gap: 18px; overflow-x: auto; padding: 4px 2px 18px; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px 18px; padding: 4px 2px 18px; }
 .g-card { margin: 0; scroll-snap-align: start; }
 .g-media { aspect-ratio: 9 / 16; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); background: #f6ead6; }
 .g-media .f-video { width: 100%; height: 100%; object-fit: cover; }
 .g-card figcaption { display: flex; flex-direction: column; gap: 2px; padding: 10px 4px 0; }
 .g-card figcaption b { font-size: 15px; }
 .g-card figcaption span { font-size: 13px; color: var(--ink-2, #6b625c); }
-@media (max-width: 720px) { .gallery { grid-auto-columns: 62%; } }
+@media (max-width: 720px) {
+  /* phones: one row that scrolls sideways, the next card peeking in */
+  .gallery { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 62%; overflow-x: auto; scroll-snap-type: x mandatory; }
+}
+
+/* <use> of the 60 40 470 620 symbol needs a 0-based viewBox on the outer svg,
+   or the offset applies twice and the left/top of the mascot gets cut. */
+
+/* Phones: keep the hero badge on one line, give flagged plan cards room for
+   their "Coming soon" tab, and make the comparison table easy to read sideways. */
+.swipe-hint { display: none; }
+@media (max-width: 720px) {
+  .badge { font-size: 12.5px; flex-wrap: nowrap; max-width: 100%; }
+  .badge b { white-space: nowrap; }
+  .badge span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .plans { gap: 34px; }
+  .swipe-hint { display: block; margin: -6px 0 10px; font-size: 13px; color: var(--ink-3); text-align: right; }
+  .table-wrap th:first-child, .table-wrap td:first-child { position: sticky; left: 0; z-index: 1; background: var(--fur); min-width: 150px; }
+}
