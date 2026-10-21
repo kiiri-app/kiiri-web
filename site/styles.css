@@ -432,3 +432,22 @@ footer { border-top: 1.5px solid var(--line); padding: 56px 0 40px; font-size: 1
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Plus badge next to an eyebrow */
+.tag-plus { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 999px; background: var(--terra, #E2673F); color: #fff; font-size: 11px; letter-spacing: .04em; vertical-align: 1px; }
+
+/* Sound toggle on clips that talk */
+.has-video, .g-media { position: relative; }
+.snd { position: absolute; right: 12px; bottom: 12px; padding: 6px 11px; border: 0; border-radius: 999px; background: rgba(42, 37, 34, .78); color: #fff; font: 700 12.5px/1 var(--font-body, sans-serif); cursor: pointer; backdrop-filter: blur(6px); }
+.snd:hover { background: rgba(42, 37, 34, .92); }
+.snd[aria-pressed="true"] { background: var(--terra, #E2673F); }
+
+/* "See it work" gallery: a row of phone-shaped clips that scrolls sideways */
+.gallery { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(200px, 23%); gap: 18px; overflow-x: auto; padding: 4px 2px 18px; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+.g-card { margin: 0; scroll-snap-align: start; }
+.g-media { aspect-ratio: 9 / 16; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); background: #f6ead6; }
+.g-media .f-video { width: 100%; height: 100%; object-fit: cover; }
+.g-card figcaption { display: flex; flex-direction: column; gap: 2px; padding: 10px 4px 0; }
+.g-card figcaption b { font-size: 15px; }
+.g-card figcaption span { font-size: 13px; color: var(--ink-2, #6b625c); }
+@media (max-width: 720px) { .gallery { grid-auto-columns: 62%; } }

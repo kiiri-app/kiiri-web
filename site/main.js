@@ -60,6 +60,24 @@
     clips.forEach((v) => v.play().catch(() => {}));
   }
 
+  // 🔊 on clips that talk: unmute this one (from the start), mute any other.
+  $$("[data-sound]").forEach((btn) => {
+    const v = btn.parentElement.querySelector("video");
+    if (!v) return;
+    btn.setAttribute("aria-pressed", "false");
+    btn.addEventListener("click", () => {
+      const on = v.muted;
+      $$("[data-sound]").forEach((b) => {
+        const o = b.parentElement.querySelector("video");
+        if (o && o !== v) { o.muted = true; b.setAttribute("aria-pressed", "false"); b.textContent = "🔊 Sound"; }
+      });
+      v.muted = !on;
+      if (on) { v.currentTime = 0; v.play().catch(() => {}); }
+      btn.setAttribute("aria-pressed", String(on));
+      btn.textContent = on ? "🔇 Mute" : "🔊 Sound";
+    });
+  });
+
   // Billing toggle
   const billBtns = $$("[data-bill]");
   const setBill = (mode) => {
