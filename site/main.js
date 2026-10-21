@@ -1,7 +1,8 @@
 // Kiiri site — small, dependency-free progressive enhancements.
 (() => {
   const REPO = "kiiri-app/kiiri";
-  const RELEASES = `https://github.com/${REPO}/releases/latest`;
+  // Builds live in a public releases-only repo; REPO (source) is only used for the star count.
+  const RELEASES = "https://github.com/kiiri-app/kiiri-releases/releases/latest";
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -41,14 +42,20 @@
     })
     .catch(() => {});
 
-  // Hero video: no autoplay for reduced motion, pause while off screen
-  const heroVideo = $("[data-hero-video]");
-  if (heroVideo) {
-    if (reduced) { heroVideo.removeAttribute("autoplay"); heroVideo.pause(); }
-    else if ("IntersectionObserver" in window) {
-      new IntersectionObserver(([en]) => (en.isIntersecting ? heroVideo.play().catch(() => {}) : heroVideo.pause()))
-        .observe(heroVideo);
-    }
+  // Clips (hero + features): play only while on screen. The hero autoplays from
+  // the HTML; the rest load lazily (preload="none") the first time they show up.
+  // Reduced motion: nothing autoplays; posters stay, with controls to opt in.
+  const clips = $$("[data-hero-video], [data-autoplay]");
+  if (reduced) {
+    clips.forEach((v) => { v.removeAttribute("autoplay"); v.pause(); v.controls = true; });
+  } else if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+      const v = en.target;
+      if (en.isIntersecting) v.play().catch(() => {}); else v.pause();
+    }), { threshold: 0.35 });
+    clips.forEach((v) => io.observe(v));
+  } else {
+    clips.forEach((v) => v.play().catch(() => {}));
   }
 
   // Billing toggle

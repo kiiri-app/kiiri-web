@@ -231,6 +231,12 @@ section { padding: 96px 0; }
 .f-art { border-radius: var(--radius); padding: 28px; min-height: 380px; position: relative; overflow: hidden; display: grid; place-items: center; }
 .f-art.terra { background: var(--terra-l); } .f-art.sage { background: var(--sage-l); } .f-art.butter { background: var(--butter-l); } .f-art.mist { background: var(--mist); }
 
+/* Feature clips: 16:9 loops that fill their card */
+.f-art.has-video { padding: 0; min-height: 0; aspect-ratio: 16 / 9; box-shadow: var(--shadow); }
+.f-video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.dev-media { display: grid; gap: 16px; min-width: 0; }
+.dev-media > .f-video { aspect-ratio: 16 / 9; height: auto; border-radius: 16px; background: #2a2522; }
+
 /* Agent state cards */
 .states { display: grid; gap: 12px; width: 100%; max-width: 420px; }
 .state {

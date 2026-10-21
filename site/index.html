@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=JetBrains+Mono:wght@400;600&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=2">
+  <link rel="stylesheet" href="/styles.css?v=3">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Kiiri","operatingSystem":"macOS, Windows, Linux","applicationCategory":"DesktopEnhancementApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"license":"https://opensource.org/licenses/MIT","url":"https://kiiri.app/"}
   </script>
@@ -133,13 +133,8 @@
             <li><span><b>Several sessions at once</b>, each with its own state</span></li>
           </ul>
         </div>
-        <div class="f-art butter">
-          <div class="states">
-            <div class="state s-work"><span class="dot">✍️</span><span>Claude Code<small>Refactoring auth.ts</small></span><span class="pill">working</span></div>
-            <div class="state s-think"><span class="dot">💭</span><span>Cursor<small>Planning the migration</small></span><span class="pill">thinking</span></div>
-            <div class="state s-need"><span class="dot">🔔</span><span>Codex<small>Needs approval to run tests</small></span><span class="pill">needs you</span></div>
-            <div class="state s-done"><span class="dot">✨</span><span>Claude Code<small>3 files changed · 2m 14s</small></span><span class="pill">done</span></div>
-          </div>
+        <div class="f-art butter has-video">
+          <video class="f-video" muted loop playsinline preload="none" poster="/assets/video/duo-poster.jpg" width="1280" height="720" aria-label="Kiri and Tori take notes while two coding agents work, then cheer when they finish" data-autoplay><source src="/assets/video/duo.webm" type="video/webm"><source src="/assets/video/duo.mp4" type="video/mp4"></video>
         </div>
       </div>
 
@@ -154,17 +149,8 @@
             <li><span><b>Drop the cat on something</b> to summarize, explain, translate or solve it</span></li>
           </ul>
         </div>
-        <div class="f-art sage">
-          <div class="ask-art">
-            <div class="ask-screen">
-              <div class="bar w60"></div><div class="bar w80"></div><div class="bar w40"></div>
-              <div class="btnrow"><div class="fake-btn"></div><div class="fake-btn"></div><div class="fake-btn target"></div></div>
-            </div>
-            <div class="ask-q">
-              <svg class="mini" viewBox="60 40 470 620" aria-hidden="true"><use href="#kiiri"/></svg>
-              <div class="say">"Where do I export this?" <br><span class="muted">It's the green <b>Export</b> button. I've marked it for you.</span></div>
-            </div>
-          </div>
+        <div class="f-art sage has-video">
+          <video class="f-video" muted loop playsinline preload="none" poster="/assets/video/ask-poster.jpg" width="1280" height="720" aria-label="Asking the cat where the Export as PDF button is; it answers in a bubble and points at the button" data-autoplay><source src="/assets/video/ask.webm" type="video/webm"><source src="/assets/video/ask.mp4" type="video/mp4"></video>
         </div>
       </div>
 
@@ -179,12 +165,8 @@
             <li><span><b>Remembers its work</b>, so it can bring things up later</span></li>
           </ul>
         </div>
-        <div class="f-art terra">
-          <div class="char-row">
-            <div class="char-card"><svg viewBox="60 40 470 620" aria-hidden="true"><use href="#kiiri"/></svg><span>Kiiri</span><small>the original</small></div>
-            <div class="char-card"><img src="/assets/pet-pixel.svg" alt="" width="120" height="120"><span>Pixel pets</span><small>petdex format</small></div>
-            <div class="char-card"><img src="/assets/pet-yours.svg" alt="" width="120" height="120"><span>Yours</span><small>paint your own</small></div>
-          </div>
+        <div class="f-art terra has-video">
+          <video class="f-video" muted loop playsinline preload="none" poster="/assets/video/drag-poster.jpg" width="1280" height="720" aria-label="Picking the cat up by the scruff: it dangles and swings, then settles where it is dropped" data-autoplay><source src="/assets/video/drag.webm" type="video/webm"><source src="/assets/video/drag.mp4" type="video/mp4"></video>
         </div>
       </div>
     </div>
@@ -226,6 +208,8 @@
             <div class="tool"><code>kiri_status</code> what Kiiri is doing right now</div>
           </div>
         </div>
+        <div class="dev-media">
+          <video class="f-video" muted loop playsinline preload="none" poster="/assets/video/mcp-poster.jpg" width="1280" height="720" aria-label="A coding agent finishes the tests and makes the cat announce that all 128 tests passed" data-autoplay><source src="/assets/video/mcp.webm" type="video/webm"><source src="/assets/video/mcp.mp4" type="video/mp4"></video>
         <div class="codeblock">
           <div class="cb-bar">~/.claude.json <button type="button" data-copy="mcp">Copy</button></div>
 <pre id="mcp"><span class="c">// Kiiri adds this for you when agent monitoring is on.</span>
@@ -240,6 +224,7 @@
 
 <span class="c">// Then just ask your agent:</span>
 <span class="s">"When the tests finish, have Kiiri point at the first failure."</span></pre>
+        </div>
         </div>
       </div>
     </div>
@@ -425,6 +410,6 @@
   </div>
 </footer>
 
-<script src="/main.js" defer></script>
+<script src="/main.js?v=3" defer></script>
 </body>
 </html>
