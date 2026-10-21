@@ -24,7 +24,7 @@
 	}
 
 	redir /download https://github.com/kiiri-app/kiiri-releases/releases/latest 302
-	redir /github https://github.com/kiiri-app/kiiri 302
+	redir /github https://github.com/kiiri-app 302
 
 	handle /api/* {
 		reverse_proxy waitlist:8080

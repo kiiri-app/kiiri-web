@@ -1,5 +1,7 @@
 // Kiiri site — small, dependency-free progressive enhancements.
 (() => {
+  // Source repos stay private until launch (their links would 404), so the site
+  // points at the org page; switch back to kiiri-app/kiiri when it goes public.
   const REPO = "kiiri-app/kiiri";
   // Builds live in a public releases-only repo; REPO (source) is only used for the star count.
   const RELEASES = "https://github.com/kiiri-app/kiiri-releases/releases/latest";
