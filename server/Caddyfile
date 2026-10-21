@@ -23,7 +23,7 @@
 		Access-Control-Allow-Origin *
 	}
 
-	redir /download https://github.com/kiiri-app/kiiri/releases/latest 302
+	redir /download https://github.com/kiiri-app/kiiri-releases/releases/latest 302
 	redir /github https://github.com/kiiri-app/kiiri 302
 
 	handle /api/* {
