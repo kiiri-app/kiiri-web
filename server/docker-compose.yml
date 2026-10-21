@@ -1,0 +1,33 @@
+# kiiri.app on the shared Hetzner box. The edge Caddy lives in the scormedit stack and
+# reaches "kiiri-web" over the scormedit_default network; nothing here publishes host ports.
+name: kiiri
+services:
+  web:
+    image: caddy:2-alpine
+    container_name: kiiri-web
+    restart: unless-stopped
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./site:/srv:ro
+    depends_on:
+      - waitlist
+    networks: [default, edge]
+
+  waitlist:
+    image: node:22-alpine
+    restart: unless-stopped
+    working_dir: /app
+    command: ["node", "waitlist.js"]
+    environment:
+      DATA_DIR: /data
+    volumes:
+      - ./waitlist.js:/app/waitlist.js:ro
+      - waitlist:/data
+
+volumes:
+  waitlist:
+
+networks:
+  edge:
+    name: scormedit_default
+    external: true

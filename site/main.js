@@ -109,7 +109,7 @@
     setTimeout(() => (btn.textContent = "Copy"), 1600);
   }));
 
-  // Waitlist → Cloudflare Pages Function (/api/waitlist)
+  // Waitlist → POST /api/waitlist (server/waitlist.js, or the Cloudflare Pages Function)
   const form = $("[data-waitlist]"), msg = $("[data-wl-msg]");
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
