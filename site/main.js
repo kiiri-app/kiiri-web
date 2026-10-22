@@ -34,8 +34,10 @@
   if (other) other.textContent = platform === "mac" ? "Windows & Linux" : "Other platforms";
   $$("[data-other]").forEach((a) => (a.href = RELEASES));
 
-  // GitHub stars (silently skipped if the repo is private / rate-limited)
-  fetch(`https://api.github.com/repos/${REPO}`)
+  // GitHub stars. Off while the source repo is private (the API answers 404,
+  // which shows up as a console error); flip on launch day with the links.
+  const SOURCE_PUBLIC = false;
+  if (SOURCE_PUBLIC) fetch(`https://api.github.com/repos/${REPO}`)
     .then((r) => (r.ok ? r.json() : null))
     .then((d) => {
       if (!d || typeof d.stargazers_count !== "number") return;
