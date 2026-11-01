@@ -5,6 +5,8 @@
   const REPO = "kiiri-app/kiiri";
   // Builds live in a public releases-only repo; REPO (source) is only used for the star count.
   const RELEASES = "https://github.com/kiiri-app/kiiri-releases/releases/latest";
+  // Stable file names uploaded with every release, so these never go stale.
+  const FILES = { mac: `${RELEASES}/download/Kiiri-mac-arm64.dmg`, windows: `${RELEASES}/download/Kiiri-Windows-Setup.exe`, linux: RELEASES };
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -24,14 +26,14 @@
   // Platform-aware download label
   const ua = navigator.userAgent;
   const platform = /Win/i.test(ua) ? "windows" : /Linux|X11/i.test(ua) && !/Android/i.test(ua) ? "linux" : "mac";
-  const labels = { mac: "Download for macOS", windows: "Download for Windows", linux: "Download for Linux" };
+  const labels = { mac: "Download for macOS", windows: "Download for Windows", linux: "Get Kiiri for macOS or Windows" };
   $$("[data-dl-label]").forEach((el) => (el.textContent = labels[platform]));
   $$("[data-dl-primary]").forEach((a) => {
-    a.href = RELEASES;
+    a.href = FILES[platform];
     if (platform !== "mac") a.querySelector("svg")?.remove();
   });
   const other = $("[data-other]");
-  if (other) other.textContent = platform === "mac" ? "Windows & Linux" : "Other platforms";
+  if (other) other.textContent = platform === "mac" ? "Windows" : "Other platforms";
   $$("[data-other]").forEach((a) => (a.href = RELEASES));
 
   // GitHub stars. Off while the source repo is private (the API answers 404,

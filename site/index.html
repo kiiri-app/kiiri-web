@@ -23,7 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=JetBrains+Mono:wght@400;600&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css?v=7">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Kiiri","operatingSystem":"macOS, Windows, Linux","applicationCategory":"DesktopEnhancementApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"license":"https://opensource.org/licenses/MIT","url":"https://kiiri.app/"}
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Kiiri","operatingSystem":"macOS, Windows","applicationCategory":"DesktopEnhancementApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"license":"https://opensource.org/licenses/MIT","url":"https://kiiri.app/"}
   </script>
 </head>
 <body>
@@ -72,7 +72,7 @@
   <section class="hero" id="download">
     <div class="wrap hero-grid">
       <div>
-        <a class="badge" href="https://github.com/kiiri-app"><b>OPEN SOURCE</b> <span>MIT licensed · macOS, Windows, Linux</span></a>
+        <a class="badge" href="https://github.com/kiiri-app"><b>OPEN SOURCE</b> <span>MIT licensed · macOS, Windows</span></a>
         <h1>A little cat that lives on <span class="hl">your desktop.</span></h1>
         <p class="lede">Kiiri keeps you company while you work, watches your coding agents, and when you ask, looks at your screen and points at the answer.</p>
         <div class="hero-ctas">
@@ -80,10 +80,11 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.8-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.6-1-2.6-3.9ZM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4Z"/></svg>
             <span data-dl-label>Download for macOS</span>
           </a>
-          <a class="btn ghost" href="#platforms" data-other>Windows &amp; Linux</a>
+          <a class="btn ghost" href="#platforms" data-other>Windows</a>
         </div>
         <p class="hero-meta" id="platforms">
-          <span>Free: 25 AI asks a month included, no key needed. Or use your own key or local models.</span>
+          <span>Free with your own key or local models. Kiiri Cloud is coming soon.</span>
+          <a href="https://github.com/kiiri-app/kiiri-releases/releases/latest/download/Kiiri-mac-intel.dmg">Intel Mac</a>
           <a href="https://github.com/kiiri-app/kiiri-releases/releases/latest">All downloads</a>
         </p>
       </div>
@@ -327,9 +328,9 @@
           <p>Kiiri talks straight to your provider with your key. We never see it. Prefer keys off your laptop? Put them on <a href="https://github.com/kiiri-app">your own proxy</a>.</p>
         </div>
         <div class="p-card">
-          <h3>Kiiri Cloud <span class="tag" style="background:var(--terra-l);color:var(--terra-d)">not stored</span></h3>
+          <h3>Kiiri Cloud <span class="tag" style="background:var(--terra-l);color:var(--terra-d)">coming soon</span></h3>
           <div class="route"><span>Your screen</span><em>→</em><span>Kiiri proxy (in memory)</span><em>→</em><span>model</span></div>
-          <p>The free plan (25 asks a month), Plus and Pro. Screenshots pass through memory and are never written to disk or used for training.</p>
+          <p>The free plan (25 asks a month), Plus and Pro, opening soon. Screenshots will pass through memory only, never written to disk or used for training.</p>
         </div>
       </div>
       <p class="pricing-foot reveal">No telemetry by default. The whole client is open source, so you can <a href="https://github.com/kiiri-app">check for yourself</a>.</p>
@@ -354,9 +355,9 @@
             <h3>Free</h3>
             <p class="for">For trying it out, local-model fans, and anyone with an API key.</p>
             <div class="price"><b>$0</b><span>forever</span></div>
-            <p class="price-note">No credit card, no API key</p>
+            <p class="price-note">No credit card</p>
             <ul>
-              <li>25 AI asks a month on Kiiri Cloud, just your email</li>
+              <li>25 AI asks a month on Kiiri Cloud, just your email (coming soon)</li>
               <li>Every character, animation and pet</li>
               <li>Agent hooks + MCP server</li>
               <li>Ask about screen, region, push-to-talk, chat</li>
@@ -426,7 +427,7 @@
             <tr><td>Sees your screen and points</td><td class="us y">Yes</td><td class="y">Yes</td><td class="n">No</td></tr>
             <tr><td>Reacts to coding agents (hooks + MCP)</td><td class="us y">Yes</td><td class="n">No</td><td class="m">Some</td></tr>
             <tr><td>Fully local mode</td><td class="us y">Yes, with Ollama</td><td class="n">No</td><td class="n">No AI</td></tr>
-            <tr><td>Windows &amp; Linux</td><td class="us y">Yes</td><td class="m">Mostly macOS</td><td class="m">Varies</td></tr>
+            <tr><td>Windows</td><td class="us y">Yes</td><td class="m">Mostly macOS</td><td class="m">Varies</td></tr>
             <tr><td>Open source</td><td class="us y">MIT</td><td class="m">Some</td><td class="m">Some</td></tr>
             <tr><td>Price to get started</td><td class="us y">Free</td><td>Free tier, then ~$20/mo</td><td>Free to ~$4</td></tr>
           </tbody>
@@ -443,7 +444,8 @@
         <h2>Questions people ask.</h2>
       </div>
       <div class="faq reveal">
-        <details open><summary>Is Kiiri really free?</summary><p>Yes. The desktop app is open source under the MIT license, and everything that runs on your machine is free with no time limit. Bring an API key from Anthropic, OpenAI or any compatible provider, or run models locally with Ollama. You also get 25 AI asks a month on Kiiri Cloud with just your email. Plus and Pro add more of what costs us money to run: hosted AI, web research, computer use, voices and sync.</p></details>
+        <details open><summary>Is Kiiri really free?</summary><p>Yes. The desktop app is open source under the MIT license, and everything that runs on your machine is free with no time limit. Bring an API key from Anthropic, OpenAI or any compatible provider, or run models locally with Ollama. Kiiri Cloud is coming soon: 25 free AI asks a month with just your email, no key. Plus and Pro add more of what costs us money to run: hosted AI, web research, computer use, voices and sync.</p></details>
+        <details><summary>macOS or Windows warns me when I open it</summary><p>Our builds aren't code-signed yet (it's on the way), so your system asks once. On macOS, open Kiiri, then go to System Settings → Privacy &amp; Security and click <b>Open Anyway</b>. On Windows, click <b>More info → Run anyway</b> in the SmartScreen box.</p></details>
         <details><summary>Is it always watching my screen?</summary><p>No. Kiiri only captures your screen when you ask: push-to-talk, a typed question, a region you select, or an automation you set up yourself. The cat's eyes following your cursor happens locally and doesn't involve any screenshots.</p></details>
         <details><summary>Which AI models does it use?</summary><p>Your choice. Claude, GPT and any OpenAI-compatible endpoint work with your own key. Local models work through Ollama. Kiiri Cloud picks a good default for you: Claude Haiku on the free plan, Claude Opus on Plus and Pro.</p></details>
         <details><summary>How does it work with Claude Code, Cursor and Codex?</summary><p>Turn on agent monitoring and Kiiri installs small hooks for the agents you use, so it can react when they start working, finish, or need you. It also registers its MCP server, so the agent can make Kiiri talk, point, or look at your screen.</p></details>
