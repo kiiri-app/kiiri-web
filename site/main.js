@@ -1,7 +1,6 @@
 // Kiiri site — small, dependency-free progressive enhancements.
 (() => {
-  // Source repos stay private until launch (their links would 404), so the site
-  // points at the org page; switch back to kiiri-app/kiiri when it goes public.
+  // The app source is public; kiiri-proxy is still private, so its links point at the org page.
   const REPO = "kiiri-app/kiiri";
   // Builds live in a public releases-only repo; REPO (source) is only used for the star count.
   const RELEASES = "https://github.com/kiiri-app/kiiri-releases/releases/latest";
@@ -38,7 +37,7 @@
 
   // GitHub stars. Off while the source repo is private (the API answers 404,
   // which shows up as a console error); flip on launch day with the links.
-  const SOURCE_PUBLIC = false;
+  const SOURCE_PUBLIC = true;
   if (SOURCE_PUBLIC) fetch(`https://api.github.com/repos/${REPO}`)
     .then((r) => (r.ok ? r.json() : null))
     .then((d) => {
